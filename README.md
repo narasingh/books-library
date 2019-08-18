@@ -11,7 +11,8 @@ $ yarn install or yarn
 ## Running
 
 ```
-$ yarn start
+$ yarn start (start ui)
+$ yarn server (start server)
 ```
 
 ## Build
