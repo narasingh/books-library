@@ -4,7 +4,12 @@ import * as Api from './api';
 import { omit } from '../utils';
 import { BookActions } from '../actions';
 
-const { fetchAllBooksSuccess, fetchAllBooksFail } = omit(BookActions, 'Type');
+const { 
+   fetchAllBooksSuccess, 
+   fetchAllBooksFail, 
+   addBookSuccess,
+   addBookFail
+ } = omit(BookActions, 'Type');
 const { Type } = BookActions;
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
@@ -21,8 +26,22 @@ export function* watchGetAllBooksAsync() {
     yield takeLatest(Type.FETCH_ALL_BOOKS, fetchBooks);
 }
 
+function* addBooks(payload: any) {
+   try {
+      const results = yield call(Api.addBooks, payload);
+      yield put(addBookSuccess(results));
+   } catch(e) {
+      yield put(addBookFail(e));
+   }
+}
+
+export function* watchAddBookAsync() {
+   yield takeLatest(Type.ADD_BOOK, addBooks);
+}
+
 export default function* rootSaga() {
     yield all([
       fork(watchGetAllBooksAsync),
+      fork(watchAddBookAsync),
     ]);
 }

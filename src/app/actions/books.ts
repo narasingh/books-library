@@ -5,6 +5,7 @@ import { BookModel } from '../models';
 export namespace BookActions {
     export enum Type {
       ADD_BOOK = '[Books] add new book details',
+      ADD_BOOK_SUCCESS = '[Books] add new book details succes ',
       ADD_BOOK_FAIL = '[Books] add book details fail',
       EDIT_BOOK = '[Books] edit book details',
       EDIT_BOOK_FAIL = '[Books] edit book details fail',
@@ -16,6 +17,8 @@ export namespace BookActions {
     }
   
     export const addBook = createAction<BookModel>(Type.ADD_BOOK);
+    export const addBookSuccess = createAction<BookModel>(Type.ADD_BOOK_SUCCESS);
+    export const addBookFail = createAction(Type.ADD_BOOK_FAIL);
     export const editBook = createAction<PartialPick<BookModel, 'isbn'>>(Type.EDIT_BOOK);
     export const deleteBook = createAction<BookModel['isbn']>(Type.DELETE_BOOK);
     export const fetchAllBooks = createAction(Type.FETCH_ALL_BOOKS);

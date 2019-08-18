@@ -1,8 +1,8 @@
 /** Library model definitions **/
 
 export enum BookStatusModel {
-    PUBLISH,
-    UNPUBLISH
+    PUBLISH = 'PUBLISH',
+    UNPUBLISH = 'UNPUBLISH'
 }
 export interface BookModel {
     id: number;
@@ -20,5 +20,6 @@ export interface BookModel {
 export interface ViewBookModel {
     inProgress: boolean;
     error: object | undefined;
+    message: string | undefined;
     list: BookModel[];
 }
